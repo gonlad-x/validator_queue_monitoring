@@ -33,4 +33,4 @@ jobs:
         git config --global user.name "gonlad-x/"
         git config --global user.email "mathildefroissart@gmail.com"
         git add index.html
-        git diff --quiet && git diff --staged --quiet || (git commit -m "Update index.html with latest validator queue data" && git push https://${GH_ACTIONS_TOKEN}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }})
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Update index.html with latest validator queue data" && git push https://${GH_ACTIONS_TOKEN}@github.com/${{ github.repository }} HEAD:${{ github.ref }})
