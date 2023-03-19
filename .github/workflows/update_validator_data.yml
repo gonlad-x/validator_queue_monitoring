@@ -28,8 +28,8 @@ jobs:
 
     - name: Commit and push changes
       run: |
-        git config --global user.name "Your Name"
-        git config --global user.email "your.email@example.com"
+        git config --global user.name "gonlad-x"
+        git config --global user.email "mathildefroissart@gmail.com"
         git add index.html
         git commit -m "Update index.html with latest validator queue data"
         git push
