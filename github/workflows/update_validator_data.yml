@@ -3,6 +3,7 @@ name: Update Validator Data
 on:
   schedule:
     - cron: '*/6 * * * *' # Run every 6 minutes (approximately every epoch)
+  workflow_dispatch:
 
 jobs:
   update-data:
