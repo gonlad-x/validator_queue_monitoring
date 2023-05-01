@@ -1,18 +1,42 @@
 import requests
 import os
 
-def estimate_waiting_time():
+def estimate_entry_waiting_time():
     response = requests.get('https://beaconcha.in/api/v1/validators/queue')
     data = response.json()
-    pending_validators = data["data"]["beaconchain_entering"]
+    beacon_entering = data["data"]["beaconchain_entering"]
     active_validators = data["data"]["validatorscount"]
-    activation_rate = 4  # 4 validators per epoch (every 6.4 minutes)
 
-    waiting_time_minutes = (pending_validators / activation_rate) * 6.4
+    churn_limit = max(4, active_validators // 65536)
+    activation_rate_per_epoch = churn_limit  # 4 validators per epoch (every 6.4 minutes) as a minimum
+
+    waiting_time_epochs = beacon_entering / activation_rate_per_epoch
+    waiting_time_seconds = waiting_time_epochs * 12 * 32  # 12 seconds per slot, 32 slots per epoch
+
+    waiting_time_minutes = waiting_time_seconds // 60
+    waiting_time_seconds = round(waiting_time_seconds % 60)
     waiting_time_hours = waiting_time_minutes // 60
     waiting_time_minutes = round(waiting_time_minutes % 60)
 
-    return waiting_time_hours, waiting_time_minutes, pending_validators, active_validators
+    return waiting_time_hours, waiting_time_minutes, waiting_time_seconds, beacon_entering, active_validators
+
+def estimate_exit_waiting_time():
+    validator_queue_url = "https://beaconcha.in/api/v1/validators/queue"
+    validator_queue_data = requests.get(validator_queue_url).json()
+    beacon_exiting = validator_queue_data["data"]["beaconchain_exiting"]
+    active_validators = validator_queue_data["data"]["validatorscount"]
+
+    churn_limit = max(4, active_validators // 65536)
+
+    waiting_time_epochs = beacon_exiting / churn_limit
+    waiting_time_seconds = waiting_time_epochs * 12 * 32  # 12 seconds per slot, 32 slots per epoch
+
+    waiting_time_minutes = waiting_time_seconds // 60
+    waiting_time_seconds = round(waiting_time_seconds % 60)
+    waiting_time_hours = waiting_time_minutes // 60
+    waiting_time_minutes = round(waiting_time_minutes % 60)
+
+    return waiting_time_hours, waiting_time_minutes, waiting_time_seconds, beacon_exiting, active_validators
 
 def generate_html(waiting_time_hours, waiting_time_minutes, pending_validators, active_validators):
     html_content = f"""<!DOCTYPE html>
@@ -55,5 +79,5 @@ def generate_html(waiting_time_hours, waiting_time_minutes, pending_validators, 
         f.write(html_content)
 
 
-waiting_time_hours, waiting_time_minutes, pending_validators, active_validators = estimate_waiting_time()
+waiting_time_hours, waiting_time_minutes, pending_validators, active_validators = estimate_entry_waiting_time()
 generate_html(waiting_time_hours, waiting_time_minutes, pending_validators, active_validators)
