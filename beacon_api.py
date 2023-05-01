@@ -19,7 +19,6 @@ def estimate_entry_waiting_time():
     waiting_time_minutes = round(waiting_time_minutes % 60)
 
     return waiting_time_hours, waiting_time_minutes, waiting_time_seconds, beacon_entering, active_validators
-
 def estimate_exit_waiting_time():
     validator_queue_url = "https://beaconcha.in/api/v1/validators/queue"
     validator_queue_data = requests.get(validator_queue_url).json()
