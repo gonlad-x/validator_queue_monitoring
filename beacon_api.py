@@ -38,7 +38,7 @@ def estimate_exit_waiting_time():
 
     return waiting_time_hours, waiting_time_minutes, waiting_time_seconds, beacon_exiting, active_validators
 
-def generate_html(waiting_time_hours, waiting_time_minutes, pending_validators, active_validators):
+def generate_html(entry_waiting_time_hours, entry_waiting_time_minutes, beacon_entering, exit_waiting_time_hours, exit_waiting_time_minutes, beacon_exiting, active_validators):
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,8 +69,10 @@ def generate_html(waiting_time_hours, waiting_time_minutes, pending_validators, 
 </head>
 <body>
     <h1>Ethereum 2.0 Validator Queue</h1>
-    <p>Estimated waiting time for new validators: {waiting_time_hours} hours and {waiting_time_minutes} minutes</p>
-    <p>Pending validators: {pending_validators}</p>
+    <p>Estimated waiting time for new validators: {entry_waiting_time_hours} hours and {entry_waiting_time_minutes} minutes</p>
+    <p>Pending validators (entry queue): {beacon_entering}</p>
+    <p>Estimated waiting time for exit queue: {exit_waiting_time_hours} hours and {exit_waiting_time_minutes} minutes</p>
+    <p>Pending validators (exit queue): {beacon_exiting}</p>
     <p>Active validators: {active_validators}</p>
 </body>
 </html>"""
@@ -78,6 +80,7 @@ def generate_html(waiting_time_hours, waiting_time_minutes, pending_validators, 
     with open("index.html", "w") as f:
         f.write(html_content)
 
+entry_waiting_time_hours, entry_waiting_time_minutes, entry_waiting_time_seconds, beacon_entering, active_validators = estimate_entry_waiting_time()
+exit_waiting_time_hours, exit_waiting_time_minutes, exit_waiting_time_seconds, beacon_exiting, active_validators = estimate_exit_waiting_time()
 
-waiting_time_hours, waiting_time_minutes, pending_validators, active_validators = estimate_entry_waiting_time()
-generate_html(waiting_time_hours, waiting_time_minutes, pending_validators, active_validators)
+generate_html(entry_waiting_time_hours, entry_waiting_time_minutes, beacon_entering, exit_waiting_time_hours, exit_waiting_time_minutes, beacon_exiting, active_validators)
