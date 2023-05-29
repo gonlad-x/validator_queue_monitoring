@@ -1,10 +1,12 @@
 import requests
 import os
 import math
+import time
 
 
 endpoint = "https://beaconcha.in/api/v1/validators/queue"
 data = requests.get(endpoint).json()["data"]
+last_updated = time.time()
 
 
 def estimate_entry_waiting_time():
@@ -104,6 +106,7 @@ def generate_html(entry_waiting_time, beacon_entering, exit_waiting_time, beacon
 		}"""
 	html_js = r"""
 		checkDarkMode();
+		lastUpdateTime();
 
 		// Check if dark mode is set
 		function checkDarkMode() {
@@ -138,7 +141,31 @@ def generate_html(entry_waiting_time, beacon_entering, exit_waiting_time, beacon
 				document.getElementById("enableDarkMode").classList.remove("d-none");
 				localStorage.setItem("darkModeEnabled", "false");
 			}
-		}"""
+		}
+
+		function lastUpdateTime() {
+			let lastUpdated = document.getElementById("lastUpdated");
+			let currentEpoch = Math.floor( Date.now() / 1000);
+			let updateEpoch = lastUpdated.getAttribute('data-last-updated');
+			let timeSinceUpdate = Math.floor( (currentEpoch - updateEpoch)/60 );
+			let lastUpdatedText = "Last updated: ";
+			if (timeSinceUpdate > 0) {
+				if (timeSinceUpdate > 1) {
+					lastUpdatedText += `${timeSinceUpdate} minutes ago`;
+				} else {
+					lastUpdatedText += `${timeSinceUpdate} minutes ago`;
+				}
+			} else {
+				let timeSinceUpdate = Math.floor(currentEpoch - updateEpoch);
+				if (timeSinceUpdate > 1) {
+					lastUpdatedText += `${timeSinceUpdate} seconds ago`;
+				} else {
+					lastUpdatedText += `${timeSinceUpdate} second ago`;
+				}
+			}
+			lastUpdated.innerHTML = lastUpdatedText;
+		}
+		"""
 	html_content = f"""<!DOCTYPE html>
 		<html lang="en">
 		<head>
@@ -152,6 +179,7 @@ def generate_html(entry_waiting_time, beacon_entering, exit_waiting_time, beacon
 		</head>
 		<body>
 			<h1>Ethereum Validator Queue</h1>
+			<p id="lastUpdated" data-last-updated="{last_updated}"></p>
 			<p>Estimated waiting time for new validators: {entry_waiting_time}</p>
 		    <p>Pending validators (entry queue): {"{:,}".format(beacon_entering)}</p>
 		    <p>Estimated waiting time for exit queue: {exit_waiting_time}</p>
