@@ -19,8 +19,7 @@ def estimate_entry_waiting_time():
 	active_validators = data["validatorscount"]
 
 	churn_limit = max(4, active_validators // 65536)
-	activation_rate_per_epoch = churn_limit  # 4 validators per epoch (every 6.4 minutes) as a minimum
-	waiting_time_epochs = beacon_entering / activation_rate_per_epoch
+	waiting_time_epochs = beacon_entering / churn_limit
 	entry_waiting_time = calculate_wait_time(waiting_time_epochs)
 
 	return entry_waiting_time, beacon_entering, active_validators
@@ -92,7 +91,7 @@ def generate_html(entry_waiting_time, beacon_entering, exit_waiting_time, beacon
 		</body>
 		</html>"""
 
-	with open("index.html", "w") as f:
+	with open("public/index.html", "w") as f:
 		f.write(html_content)
 
 
