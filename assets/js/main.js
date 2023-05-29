@@ -25,17 +25,20 @@ function setDarkMode(enable) {
 	var root = document.getElementsByTagName("html")[0];
 	if (enable == "true") {
 		// Enable dark mode
+		root.setAttribute("data-bs-theme", "dark"); 
 		root.classList.add("dark-mode");
 		document.getElementById("disableDarkMode").classList.remove("d-none");
 		localStorage.setItem("darkModeEnabled", "true");
 	} else if (enable == "false") {
 		// Disable dark mode
+		root.setAttribute("data-bs-theme", "light"); 
 		root.classList.remove("dark-mode");
 		document.getElementById("enableDarkMode").classList.remove("d-none");
 		localStorage.setItem("darkModeEnabled", "false");
 	}
 }
 
+// Populate the last updated time
 function lastUpdateTime() {
 	let lastUpdated = document.getElementById("lastUpdated");
 	let currentEpoch = Math.floor( Date.now() / 1000);

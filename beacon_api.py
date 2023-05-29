@@ -4,6 +4,9 @@ import math
 import time
 from partials.head import head
 from partials.dark_mode_toggle import dark_mode_toggle
+from partials.header import header
+from partials.queue_overview import queue_overview
+from partials.footer import footer
 
 
 endpoint = "https://beaconcha.in/api/v1/validators/queue"
@@ -42,7 +45,6 @@ def calculate_wait_time(waiting_time_epochs):
 	waiting_time_hours = math.floor(waiting_time_seconds // 3600)
 	waiting_time_hours_minutes = math.floor( (waiting_time_seconds % 3600)/3600*60 )
 
-
 	if waiting_time_days > 0:
 		days_text = "days"
 		if waiting_time_days == 1:
@@ -69,14 +71,10 @@ def generate_html(entry_waiting_time, beacon_entering, exit_waiting_time, beacon
 		{head}
 		<body>
 			{dark_mode_toggle}
+			{header(last_updated)}
 
-			<h1>Ethereum Validator Queue</h1>
-			<p id="lastUpdated" data-last-updated="{last_updated}"></p>
-			<p>Estimated waiting time for new validators: {entry_waiting_time}</p>
-		    <p>Pending validators (entry queue): {"{:,}".format(beacon_entering)}</p>
-		    <p>Estimated waiting time for exit queue: {exit_waiting_time}</p>
-		    <p>Pending validators (exit queue): {"{:,}".format(beacon_exiting)}</p>
-		    <p>Active validators: {"{:,}".format(active_validators)}</p>
+			{queue_overview(entry_waiting_time, beacon_entering, exit_waiting_time, beacon_exiting)}
+
 
 			{footer}
 		</body>
@@ -84,6 +82,7 @@ def generate_html(entry_waiting_time, beacon_entering, exit_waiting_time, beacon
 
 	with open("index.html", "w") as f:
 		f.write(html_content)
+
 
 entry_waiting_time, beacon_entering, active_validators = estimate_entry_waiting_time()
 exit_waiting_time, beacon_exiting, active_validators = estimate_exit_waiting_time()
