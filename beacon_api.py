@@ -67,7 +67,7 @@ def generate_html(entry_waiting_time_hours, entry_waiting_time_minutes, beacon_e
     </style>
 </head>
 <body>
-    <h1>Ethereum 2.0 Validator Queue</h1>
+    <h1>Ethereum Validator Queue</h1>
     <p>Estimated waiting time for new validators: {entry_waiting_time_hours} hours and {entry_waiting_time_minutes} minutes</p>
     <p>Pending validators (entry queue): {beacon_entering}</p>
     <p>Estimated waiting time for exit queue: {exit_waiting_time_hours} hours and {exit_waiting_time_minutes} minutes</p>
