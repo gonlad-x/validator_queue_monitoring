@@ -1,11 +1,15 @@
 import requests
 import os
+import math
+
+
+endpoint = "https://beaconcha.in/api/v1/validators/queue"
+data = requests.get(endpoint).json()["data"]
+
 
 def estimate_entry_waiting_time():
-	response = requests.get('https://beaconcha.in/api/v1/validators/queue')
-	data = response.json()
-	beacon_entering = data["data"]["beaconchain_entering"]
-	active_validators = data["data"]["validatorscount"]
+	beacon_entering = data["beaconchain_entering"]
+	active_validators = data["validatorscount"]
 
 	churn_limit = max(4, active_validators // 65536)
 	activation_rate_per_epoch = churn_limit  # 4 validators per epoch (every 6.4 minutes) as a minimum
@@ -13,31 +17,40 @@ def estimate_entry_waiting_time():
 	waiting_time_epochs = beacon_entering / activation_rate_per_epoch
 	waiting_time_seconds = waiting_time_epochs * 12 * 32  # 12 seconds per slot, 32 slots per epoch
 
-	waiting_time_minutes = waiting_time_seconds // 60
-	waiting_time_seconds = round(waiting_time_seconds % 60)
-	waiting_time_hours = waiting_time_minutes // 60
-	waiting_time_minutes = round(waiting_time_minutes % 60)
+	waiting_time_days = math.floor(waiting_time_seconds // 86400)
+	waiting_time_days_hours = math.floor( (waiting_time_seconds % 86400)/86400*24 )
+	waiting_time_hours = math.floor(waiting_time_seconds // 3600)
+	waiting_time_hours_minutes = math.floor( (waiting_time_seconds % 3600)/3600*60 )
 
-	return waiting_time_hours, waiting_time_minutes, waiting_time_seconds, beacon_entering, active_validators
+	entry_waiting_time = f"""{waiting_time_hours} hours, {waiting_time_hours_minutes} minutes"""
+	if waiting_time_days > 0:
+		entry_waiting_time = f"""{waiting_time_days} days, {waiting_time_days_hours} hours"""
+
+	return entry_waiting_time, beacon_entering, active_validators
+
+
 def estimate_exit_waiting_time():
-	validator_queue_url = "https://beaconcha.in/api/v1/validators/queue"
-	validator_queue_data = requests.get(validator_queue_url).json()
-	beacon_exiting = validator_queue_data["data"]["beaconchain_exiting"]
-	active_validators = validator_queue_data["data"]["validatorscount"]
+	beacon_exiting = data["beaconchain_exiting"]
+	active_validators = data["validatorscount"]
 
 	churn_limit = max(4, active_validators // 65536)
 
 	waiting_time_epochs = beacon_exiting / churn_limit
 	waiting_time_seconds = waiting_time_epochs * 12 * 32  # 12 seconds per slot, 32 slots per epoch
 
-	waiting_time_minutes = waiting_time_seconds // 60
-	waiting_time_seconds = round(waiting_time_seconds % 60)
-	waiting_time_hours = waiting_time_minutes // 60
-	waiting_time_minutes = round(waiting_time_minutes % 60)
+	waiting_time_days = math.floor(waiting_time_seconds // 86400)
+	waiting_time_days_hours = math.floor( (waiting_time_seconds % 86400)/86400*24 )
+	waiting_time_hours = math.floor(waiting_time_seconds // 3600)
+	waiting_time_hours_minutes = math.floor( (waiting_time_seconds % 3600)/3600*60 )
 
-	return waiting_time_hours, waiting_time_minutes, waiting_time_seconds, beacon_exiting, active_validators
+	exit_waiting_time = f"""{waiting_time_hours} hours, {waiting_time_hours_minutes} minutes"""
+	if waiting_time_days > 0:
+		exit_waiting_time = f"""{waiting_time_days} days, {waiting_time_days_hours} hours"""
 
-def generate_html(entry_waiting_time_hours, entry_waiting_time_minutes, beacon_entering, exit_waiting_time_hours, exit_waiting_time_minutes, beacon_exiting, active_validators):
+	return exit_waiting_time, beacon_exiting, active_validators
+
+
+def generate_html(entry_waiting_time, beacon_entering, exit_waiting_time, beacon_exiting, active_validators):
 	html_style = r"""
 		body {
 			font-family: Arial, sans-serif;
@@ -139,11 +152,11 @@ def generate_html(entry_waiting_time_hours, entry_waiting_time_minutes, beacon_e
 		</head>
 		<body>
 			<h1>Ethereum Validator Queue</h1>
-			<p>Estimated waiting time for new validators: {entry_waiting_time_hours} hours and {entry_waiting_time_minutes} minutes</p>
-		    <p>Pending validators (entry queue): {beacon_entering}</p>
-		    <p>Estimated waiting time for exit queue: {exit_waiting_time_hours} hours and {exit_waiting_time_minutes} minutes</p>
-		    <p>Pending validators (exit queue): {beacon_exiting}</p>
-		    <p>Active validators: {active_validators}</p>
+			<p>Estimated waiting time for new validators: {entry_waiting_time}</p>
+		    <p>Pending validators (entry queue): {"{:,}".format(beacon_entering)}</p>
+		    <p>Estimated waiting time for exit queue: {exit_waiting_time}</p>
+		    <p>Pending validators (exit queue): {"{:,}".format(beacon_exiting)}</p>
+		    <p>Active validators: {"{:,}".format(active_validators)}</p>
 			<hr>
 			<p>
 				<a href="https://github.com/etheralpha/validatorqueue-com" target="_blank">
@@ -173,7 +186,7 @@ def generate_html(entry_waiting_time_hours, entry_waiting_time_minutes, beacon_e
 	with open("index.html", "w") as f:
 		f.write(html_content)
 
-entry_waiting_time_hours, entry_waiting_time_minutes, entry_waiting_time_seconds, beacon_entering, active_validators = estimate_entry_waiting_time()
-exit_waiting_time_hours, exit_waiting_time_minutes, exit_waiting_time_seconds, beacon_exiting, active_validators = estimate_exit_waiting_time()
+entry_waiting_time, beacon_entering, active_validators = estimate_entry_waiting_time()
+exit_waiting_time, beacon_exiting, active_validators = estimate_exit_waiting_time()
 
-generate_html(entry_waiting_time_hours, entry_waiting_time_minutes, beacon_entering, exit_waiting_time_hours, exit_waiting_time_minutes, beacon_exiting, active_validators)
+generate_html(entry_waiting_time, beacon_entering, exit_waiting_time, beacon_exiting, active_validators)
