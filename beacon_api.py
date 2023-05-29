@@ -15,18 +15,8 @@ def estimate_entry_waiting_time():
 
 	churn_limit = max(4, active_validators // 65536)
 	activation_rate_per_epoch = churn_limit  # 4 validators per epoch (every 6.4 minutes) as a minimum
-
 	waiting_time_epochs = beacon_entering / activation_rate_per_epoch
-	waiting_time_seconds = waiting_time_epochs * 12 * 32  # 12 seconds per slot, 32 slots per epoch
-
-	waiting_time_days = math.floor(waiting_time_seconds // 86400)
-	waiting_time_days_hours = math.floor( (waiting_time_seconds % 86400)/86400*24 )
-	waiting_time_hours = math.floor(waiting_time_seconds // 3600)
-	waiting_time_hours_minutes = math.floor( (waiting_time_seconds % 3600)/3600*60 )
-
-	entry_waiting_time = f"""{waiting_time_hours} hours, {waiting_time_hours_minutes} minutes"""
-	if waiting_time_days > 0:
-		entry_waiting_time = f"""{waiting_time_days} days, {waiting_time_days_hours} hours"""
+	entry_waiting_time = calculate_wait_time(waiting_time_epochs)
 
 	return entry_waiting_time, beacon_entering, active_validators
 
@@ -36,8 +26,13 @@ def estimate_exit_waiting_time():
 	active_validators = data["validatorscount"]
 
 	churn_limit = max(4, active_validators // 65536)
-
 	waiting_time_epochs = beacon_exiting / churn_limit
+	exit_waiting_time = calculate_wait_time(waiting_time_epochs)
+
+	return exit_waiting_time, beacon_exiting, active_validators
+
+
+def calculate_wait_time(waiting_time_epochs):
 	waiting_time_seconds = waiting_time_epochs * 12 * 32  # 12 seconds per slot, 32 slots per epoch
 
 	waiting_time_days = math.floor(waiting_time_seconds // 86400)
@@ -45,11 +40,25 @@ def estimate_exit_waiting_time():
 	waiting_time_hours = math.floor(waiting_time_seconds // 3600)
 	waiting_time_hours_minutes = math.floor( (waiting_time_seconds % 3600)/3600*60 )
 
-	exit_waiting_time = f"""{waiting_time_hours} hours, {waiting_time_hours_minutes} minutes"""
-	if waiting_time_days > 0:
-		exit_waiting_time = f"""{waiting_time_days} days, {waiting_time_days_hours} hours"""
 
-	return exit_waiting_time, beacon_exiting, active_validators
+	if waiting_time_days > 0:
+		days_text = "days"
+		if waiting_time_days == 1:
+			days_text = "day"
+		hours_text = "hours"
+		if waiting_time_days_hours == 1:
+			hours_text = "hour"
+		formatted_wait_time = f"""{waiting_time_days} {days_text}, {waiting_time_days_hours} {hours_text}"""
+	else:
+		hours_text = "days"
+		if waiting_time_days == 1:
+			hours_text = "day"
+		minutes_text = "hours"
+		if waiting_time_days_hours == 1:
+			minutes_text = "hour"
+		formatted_wait_time = f"""{waiting_time_hours} {hours_text}, {waiting_time_hours_minutes} {minutes_text}"""
+
+	return formatted_wait_time
 
 
 def generate_html(entry_waiting_time, beacon_entering, exit_waiting_time, beacon_exiting, active_validators):
@@ -153,7 +162,7 @@ def generate_html(entry_waiting_time, beacon_entering, exit_waiting_time, beacon
 				if (timeSinceUpdate > 1) {
 					lastUpdatedText += `${timeSinceUpdate} minutes ago`;
 				} else {
-					lastUpdatedText += `${timeSinceUpdate} minutes ago`;
+					lastUpdatedText += `${timeSinceUpdate} minute ago`;
 				}
 			} else {
 				let timeSinceUpdate = Math.floor(currentEpoch - updateEpoch);
