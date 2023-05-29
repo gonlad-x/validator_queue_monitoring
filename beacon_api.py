@@ -40,12 +40,24 @@ def estimate_exit_waiting_time():
 def calculate_wait_time(waiting_time_epochs):
 	waiting_time_seconds = waiting_time_epochs * 12 * 32  # 12 seconds per slot, 32 slots per epoch
 
+	waiting_time_months = math.floor(waiting_time_seconds // 2592000)
+	waiting_time_months_days = round( (waiting_time_seconds % 2592000)/2592000*30 )
+
 	waiting_time_days = math.floor(waiting_time_seconds // 86400)
 	waiting_time_days_hours = round( (waiting_time_seconds % 86400)/86400*24 )
+
 	waiting_time_hours = math.floor(waiting_time_seconds // 3600)
 	waiting_time_hours_minutes = round( (waiting_time_seconds % 3600)/3600*60 )
 
-	if waiting_time_days > 0:
+	# if waiting_time_months > 0:
+	# 	months_text = "months"
+	# 	if waiting_time_months == 1:
+	# 		months_text = "month"
+	# 	days_text = "days"
+	# 	if waiting_time_months_days == 1:
+	# 		days_text = "day"
+	# 	formatted_wait_time = f"""{waiting_time_months} {months_text}, {waiting_time_months_days} {days_text}"""
+	elif waiting_time_days > 0:
 		days_text = "days"
 		if waiting_time_days == 1:
 			days_text = "day"
