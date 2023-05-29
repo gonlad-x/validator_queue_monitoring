@@ -1,3 +1,6 @@
-# Validator activation and exit times
-Provide an estimate of the waiting time before your ETH 2 validator becomes active or elligible for exit.
-The data is fetched using [this endpoint from beaconcha.in API](https://beaconcha.in/api/v1/docs/index.html#/Validator/get_api_v1_validators_queue). 
+# validatorqueque-com
+
+This repo contains the source code for the [ValidatorQueue.com](https://validatorqueque.com).
+
+Provides an estimate of the waiting time before your Ethereum validator becomes active or elligible for exit.
+The data is fetched using the [beaconcha.in API](https://beaconcha.in/api/v1/docs/index.html#/Validator/get_api_v1_validators_queue).
