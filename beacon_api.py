@@ -57,7 +57,7 @@ def calculate_wait_time(waiting_time_epochs):
 	# 	if waiting_time_months_days == 1:
 	# 		days_text = "day"
 	# 	formatted_wait_time = f"""{waiting_time_months} {months_text}, {waiting_time_months_days} {days_text}"""
-	elif waiting_time_days > 0:
+	if waiting_time_days > 0:
 		days_text = "days"
 		if waiting_time_days == 1:
 			days_text = "day"
