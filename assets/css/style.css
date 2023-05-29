@@ -1,0 +1,50 @@
+body {
+	font-family: Arial, sans-serif;
+	max-width: 800px;
+	margin: 0 auto;
+	background-color: #f4f4f4;
+	padding: 1rem;
+}
+.dark-mode body {
+	background-color: #212529;
+	color: #adb5bd;
+}
+
+h1 {
+	color: #333;
+	font-size: 2rem;
+}
+.dark-mode h1 {
+	color: #adb5bd;
+}
+
+p {
+	font-size: 1.1rem;
+	color: #666;
+	margin-bottom: 1.5rem;
+}
+.dark-mode p {
+	color: #adb5bd;
+}
+
+.github-link {
+	fill: #333;
+}
+.dark-mode .github-link {
+	fill:  #c9d1d9;
+}
+
+#darkModeToggle {
+	position: absolute;
+	padding: 5px;
+	cursor: pointer;
+	right: 1rem;
+	top: 0.5rem;
+}
+#darkModeToggle svg {
+	height: 1.5rem;
+	width: 1.5rem;
+}
+.d-none {
+	display: none;
+}
