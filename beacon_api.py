@@ -41,9 +41,9 @@ def calculate_wait_time(waiting_time_epochs):
 	waiting_time_seconds = waiting_time_epochs * 12 * 32  # 12 seconds per slot, 32 slots per epoch
 
 	waiting_time_days = math.floor(waiting_time_seconds // 86400)
-	waiting_time_days_hours = math.floor( (waiting_time_seconds % 86400)/86400*24 )
+	waiting_time_days_hours = round( (waiting_time_seconds % 86400)/86400*24 )
 	waiting_time_hours = math.floor(waiting_time_seconds // 3600)
-	waiting_time_hours_minutes = math.floor( (waiting_time_seconds % 3600)/3600*60 )
+	waiting_time_hours_minutes = round( (waiting_time_seconds % 3600)/3600*60 )
 
 	if waiting_time_days > 0:
 		days_text = "days"
@@ -54,12 +54,12 @@ def calculate_wait_time(waiting_time_epochs):
 			hours_text = "hour"
 		formatted_wait_time = f"""{waiting_time_days} {days_text}, {waiting_time_days_hours} {hours_text}"""
 	else:
-		hours_text = "days"
+		hours_text = "hours"
 		if waiting_time_days == 1:
-			hours_text = "day"
-		minutes_text = "hours"
+			hours_text = "hour"
+		minutes_text = "minutes"
 		if waiting_time_days_hours == 1:
-			minutes_text = "hour"
+			minutes_text = "minute"
 		formatted_wait_time = f"""{waiting_time_hours} {hours_text}, {waiting_time_hours_minutes} {minutes_text}"""
 
 	return formatted_wait_time
