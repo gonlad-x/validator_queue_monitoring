@@ -6,9 +6,18 @@ head = r"""
 		<meta name="keywords" content="ethereum, validator, queue, staking, eth, exit, enter, wait">
 		<meta name="description" content="A dashboard showing the Ethereum validator enter and exit queue and estimated wait times.">
 		<title>Validator Queue</title>
-
 		<link rel="dns-prefetch" href="https://validatorqueue.com">
 		<link rel="canonical" href="https://validatorqueue.com">
+		
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-DK1NZYRW79"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'G-DK1NZYRW79');
+		</script>
 
 		<!-- Icons -->
 		<link rel="apple-touch-icon" sizes="180x180" href="assets/img/icons/apple-touch-icon.png">
