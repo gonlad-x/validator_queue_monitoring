@@ -16,7 +16,6 @@ def footer(historical_data):
 			const historical_data = {historical_data}
 		</script>
 		<script src="assets/js/main.js" type="application/javascript"></script>
-		<script src="assets/js/data.js" type="application/javascript"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
