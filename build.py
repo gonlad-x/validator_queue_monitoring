@@ -55,28 +55,34 @@ def calculate_wait_time(waiting_time_epochs):
 
 	# if waiting_time_months > 0:
 	#   months_text = "months"
+	#   days_text = "days"
 	#   if waiting_time_months == 1:
 	#       months_text = "month"
-	#   days_text = "days"
 	#   if waiting_time_months_days == 1:
 	#       days_text = "day"
 	#   formatted_wait_time = f"""{waiting_time_months} {months_text}, {waiting_time_months_days} {days_text}"""
 	if waiting_time_days > 0:
 		days_text = "days"
+		hours_text = "hours"
 		if waiting_time_days == 1:
 			days_text = "day"
-		hours_text = "hours"
 		if waiting_time_days_hours == 1:
 			hours_text = "hour"
 		formatted_wait_time = f"""{waiting_time_days} {days_text}, {waiting_time_days_hours} {hours_text}"""
-	else:
+	elif waiting_time_hours > 0:
 		hours_text = "hours"
-		if waiting_time_days == 1:
-			hours_text = "hour"
 		minutes_text = "minutes"
-		if waiting_time_days_hours == 1:
+		if waiting_time_hours == 1:
+			hours_text = "hour"
+		if waiting_time_hours_minutes == 1:
 			minutes_text = "minute"
 		formatted_wait_time = f"""{waiting_time_hours} {hours_text}, {waiting_time_hours_minutes} {minutes_text}"""
+	else:
+		minutes_text = "minutes"
+		if waiting_time_hours_minutes == 1:
+			minutes_text = "minute"
+		formatted_wait_time = f"""{waiting_time_hours_minutes} {minutes_text}"""
+
 
 	return formatted_wait_time, waiting_time_days_raw
 
