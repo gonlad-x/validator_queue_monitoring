@@ -61,17 +61,24 @@
 	        datasets: [
 				{
 		            label: 'Entry',
-		            data: historical_data.map(row => row.entry_wait)
+		            data: historical_data.map(row => row.entry_wait),
+					fill: true,
+					pointStyle: false
 				},
 				{
 		            label: 'Exit',
-		            data: historical_data.map(row => row.exit_wait)
+		            data: historical_data.map(row => row.exit_wait),
+					fill: true,
+					pointStyle: false
 				}
 	        ]
 		},
 		options: {
 			scales: {
 				x: scales_x
+			},
+			interaction: {
+				intersect: false,
 			}
 		}
 	});
@@ -83,11 +90,15 @@
 	        datasets: [
 				{
 		            label: 'Entry',
-		            data: historical_data.map(row => Math.round(row.entry_queue))
+		            data: historical_data.map(row => Math.round(row.entry_queue)),
+					fill: true,
+					pointStyle: false
 				},
 				{
 		            label: 'Exit',
-		            data: historical_data.map(row => Math.round(row.exit_queue))
+		            data: historical_data.map(row => Math.round(row.exit_queue)),
+					fill: true,
+					pointStyle: false
 				}
 	        ]
 		},
@@ -101,6 +112,9 @@
 	                    }
 	                }
 	            }
+			},
+			interaction: {
+				intersect: false,
 			}
 		}
 	});
@@ -112,7 +126,9 @@
 	        datasets: [
 				{
 		            label: 'Total validators',
-		            data: historical_data.map(row => Math.round(row.validators))
+		            data: historical_data.map(row => Math.round(row.validators)),
+					fill: true,
+					pointStyle: false
 				}
 	        ]
 		},
@@ -126,6 +142,9 @@
 	                    }
 	                }
 	            }
+			},
+			interaction: {
+				intersect: false,
 			}
 		}
 	});
