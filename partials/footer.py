@@ -1,3 +1,5 @@
+import json
+
 def footer(historical_data):
 	return f"""
 		<hr class="mt-5">
@@ -13,7 +15,7 @@ def footer(historical_data):
 		</p>
 
 		<script type="text/javascript">
-			const historical_data = {historical_data}
+			const historical_data = {json.dumps(historical_data)}
 		</script>
 		<script src="assets/js/main.js" type="application/javascript"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
