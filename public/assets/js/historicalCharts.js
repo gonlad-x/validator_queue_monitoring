@@ -170,7 +170,7 @@
 					position: 'left',
 	                ticks: {
 	                    callback: function(value) {
-	                        return `${value}`;
+	                        return `${Math.round(value/100000)/10}M`;
 	                    }
 	                }
 	            },
@@ -180,8 +180,9 @@
 						drawOnChartArea: false, // only want the grid lines for one axis to show up
 			        },
 	                ticks: {
+	                	precision: 1,
 	                    callback: function(value) {
-	                        return `${value}`;
+	                        return `${value}%`;
 	                    }
 	                }
 	            }
@@ -199,7 +200,7 @@
 	        datasets: [
 				{
 		            label: 'Staking APR (%)',
-		            data: historical_data.filter(row => row.apr !== null).map(row => Math.round(row.apr)),
+		            data: historical_data.filter(row => row.apr !== null).map(row => row.apr),
 					fill: fill,
 					pointStyle: false
 				}
@@ -210,6 +211,7 @@
 				x: scales_x,
 				y: {
 	                ticks: {
+	                	precision: 2,
 	                    callback: function(value) {
 	                        return `${value}%`;
 	                    }
