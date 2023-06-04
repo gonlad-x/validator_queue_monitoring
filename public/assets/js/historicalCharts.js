@@ -85,17 +85,17 @@
 	var waitChart = new Chart(document.getElementById('waitChart'), {
 		type: 'line',  
 		data: {
-			labels: historical_data.filter(row => row.entry_wait || row.exit_wait).map(row => row.date),
+			labels: historical_data.map(row => row.date),
 	        datasets: [
 				{
 		            label: 'Entry',
-		            data: historical_data.filter(row => row.entry_wait).map(row => row.entry_wait),
+		            data: historical_data.map(row => row.entry_wait),
 					fill: fill,
 					pointStyle: false
 				},
 				{
 		            label: 'Exit',
-		            data: historical_data.filter(row => row.exit_wait).map(row => row.exit_wait),
+		            data: historical_data.map(row => row.exit_wait),
 					fill: fill,
 					pointStyle: false
 				}
