@@ -8,6 +8,7 @@ from partials.head import head
 from partials.dark_mode_toggle import dark_mode_toggle
 from partials.header import header
 from partials.overview import overview
+from partials.faq import faq
 from partials.historical_charts import historical_charts
 from partials.footer import footer
 
@@ -197,6 +198,7 @@ def generate_html(entry_waiting_time, beacon_entering, exit_waiting_time, beacon
 			<div class="container">
 				{header(last_updated)}
 				{overview(entry_waiting_time, beacon_entering, exit_waiting_time, beacon_exiting, current_churn, active_validators, amount_eth_staked, percent_eth_staked, staking_apr)}
+				{faq}
 				{historical_charts}
 				{footer(historical_data)}
 			</div>
