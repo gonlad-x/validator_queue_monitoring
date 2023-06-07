@@ -41,10 +41,10 @@ function updateData(el, days) {
 	}
 	let chart = window[el.parentElement.getAttribute('data-chart')];
 	chart.data.labels = chart.data.labels_all.slice(-days);
-    chart.data.datasets.forEach((data, i) => {
-        data = chart.data.datasets[i].data_all.slice(-days);
-    });
-    chart.update();
+	chart.data.datasets.forEach((data, i) => {
+		data = chart.data.datasets[i].data_all.slice(-days);
+	});
+	chart.update();
 }
 
 
