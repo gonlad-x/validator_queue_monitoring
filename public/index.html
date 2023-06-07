@@ -79,7 +79,7 @@
     			Data provided by 
     			<a href="https://beaconcha.in/" target="_blank">beaconcha.in</a>
     		</small>
-    		<small id="lastUpdated" class="d-block fst-italic fs-6" data-last-updated="1686149287.7129805"></small>
+    		<small id="lastUpdated" class="d-block fst-italic fs-6" data-last-updated="1686149915.0271673"></small>
     	</div>
     </div>
   
@@ -92,7 +92,7 @@
 			    <div class="card-text">
 			    	<div class="d-flex justify-content-between">
 				    	<span>Validators: </span>
-				    	<span>94,724</span>
+				    	<span>94,706</span>
 			    	</div>
 				    <div class="d-flex justify-content-between">
 				    	<span>Wait: </span>
@@ -112,11 +112,11 @@
 			    <div class="card-text">
 			    	<div class="d-flex justify-content-between">
 			    		<span>Validators: </span>
-			    		<span>123</span>
+			    		<span>112</span>
 		    		</div>
 				    <div class="d-flex justify-content-between">
 				    	<span>Wait: </span>
-				    	<span>1 hour, 27 minutes</span>
+				    	<span>1 hour, 20 minutes</span>
 			    	</div>
 			    	<div class="d-flex justify-content-between">
 				    	<span>Churn: </span>
@@ -178,55 +178,155 @@
 		<div class="card shadow border-light mt-4">
 		  <div class="card-body">
 		    <h5 class="card-title">Validator Queue</h5>
-		    <p class="card-text">
+		    <div class="card-text">
+		    	<div class="text-center text-sm-end">
+			    	
+		<div class="btn-group border mb-1" role="group" data-chart="queueChart" aria-label="Change chart timeframe">
+			<input type="radio" class="btn-check" name="filter" id="queueChartfilter-7" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="queueChartfilter-7" onclick="updateData(this,7)">7d</label>
+
+			<input type="radio" class="btn-check" name="filter" id="queueChartfilter-30" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="queueChartfilter-30" onclick="updateData(this,30)">30d</label>
+
+			<input type="radio" class="btn-check" name="filter" id="queueChartfilter-90" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="queueChartfilter90" onclick="updateData(this,90)">90d</label>
+
+			<input type="radio" class="btn-check" name="filter" id="queueChartfilter-365" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="queueChartfilter-365" onclick="updateData(this,365)">1y</label>
+
+			<input type="radio" class="btn-check" name="filter" id="queueChartfilter-0" autocomplete="off" checked>
+			<label class="btn btn-outline-black btn-sm border px-sm-3 active" for="queueChartfilter-0" onclick="updateData(this,0)">All</label>
+		</div>
+	
+				</div>
 		    	<div>
 					<canvas id="queueChart"></canvas>
 				</div>
-			</p>
+			</div>
 		  </div>
 		</div>
 
 		<div class="card shadow border-light mt-4">
 		  <div class="card-body">
 		    <h5 class="card-title">Queue Wait Time (days)</h5>
-		    <p class="card-text">
+		    <div class="card-text">
+		    	<div class="text-center text-sm-end">
+			    	
+		<div class="btn-group border mb-1" role="group" data-chart="waitChart" aria-label="Change chart timeframe">
+			<input type="radio" class="btn-check" name="filter" id="waitChartfilter-7" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="waitChartfilter-7" onclick="updateData(this,7)">7d</label>
+
+			<input type="radio" class="btn-check" name="filter" id="waitChartfilter-30" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="waitChartfilter-30" onclick="updateData(this,30)">30d</label>
+
+			<input type="radio" class="btn-check" name="filter" id="waitChartfilter-90" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="waitChartfilter90" onclick="updateData(this,90)">90d</label>
+
+			<input type="radio" class="btn-check" name="filter" id="waitChartfilter-365" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="waitChartfilter-365" onclick="updateData(this,365)">1y</label>
+
+			<input type="radio" class="btn-check" name="filter" id="waitChartfilter-0" autocomplete="off" checked>
+			<label class="btn btn-outline-black btn-sm border px-sm-3 active" for="waitChartfilter-0" onclick="updateData(this,0)">All</label>
+		</div>
+	
+				</div>
 		    	<div>
 					<canvas id="waitChart"></canvas>
 				</div>
-			</p>
+			</div>
 		  </div>
 		</div>
 
 		<div class="card shadow border-light mt-4">
 		  <div class="card-body">
 		    <h5 class="card-title">Active Validators</h5>
-		    <p class="card-text">
+		    <div class="card-text">
+		    	<div class="text-center text-sm-end">
+			    	
+		<div class="btn-group border mb-1" role="group" data-chart="validatorChart" aria-label="Change chart timeframe">
+			<input type="radio" class="btn-check" name="filter" id="validatorChartfilter-7" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="validatorChartfilter-7" onclick="updateData(this,7)">7d</label>
+
+			<input type="radio" class="btn-check" name="filter" id="validatorChartfilter-30" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="validatorChartfilter-30" onclick="updateData(this,30)">30d</label>
+
+			<input type="radio" class="btn-check" name="filter" id="validatorChartfilter-90" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="validatorChartfilter90" onclick="updateData(this,90)">90d</label>
+
+			<input type="radio" class="btn-check" name="filter" id="validatorChartfilter-365" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="validatorChartfilter-365" onclick="updateData(this,365)">1y</label>
+
+			<input type="radio" class="btn-check" name="filter" id="validatorChartfilter-0" autocomplete="off" checked>
+			<label class="btn btn-outline-black btn-sm border px-sm-3 active" for="validatorChartfilter-0" onclick="updateData(this,0)">All</label>
+		</div>
+	
+				</div>
 		    	<div>
 					<canvas id="validatorChart"></canvas>
 				</div>
-			</p>
+			</div>
 		  </div>
 		</div>
 
 		<div class="card shadow border-light mt-4">
 		  <div class="card-body">
 		    <h5 class="card-title">Supply Staked</h5>
-		    <p class="card-text">
+		    <div class="card-text">
+		    	<div class="text-center text-sm-end">
+			    	
+		<div class="btn-group border mb-1" role="group" data-chart="stakedChart" aria-label="Change chart timeframe">
+			<input type="radio" class="btn-check" name="filter" id="stakedChartfilter-7" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="stakedChartfilter-7" onclick="updateData(this,7)">7d</label>
+
+			<input type="radio" class="btn-check" name="filter" id="stakedChartfilter-30" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="stakedChartfilter-30" onclick="updateData(this,30)">30d</label>
+
+			<input type="radio" class="btn-check" name="filter" id="stakedChartfilter-90" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="stakedChartfilter90" onclick="updateData(this,90)">90d</label>
+
+			<input type="radio" class="btn-check" name="filter" id="stakedChartfilter-365" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="stakedChartfilter-365" onclick="updateData(this,365)">1y</label>
+
+			<input type="radio" class="btn-check" name="filter" id="stakedChartfilter-0" autocomplete="off" checked>
+			<label class="btn btn-outline-black btn-sm border px-sm-3 active" for="stakedChartfilter-0" onclick="updateData(this,0)">All</label>
+		</div>
+	
+				</div>
 		    	<div>
 					<canvas id="stakedChart"></canvas>
 				</div>
-			</p>
+			</div>
 		  </div>
 		</div>
 
 		<div class="card shadow border-light mt-4">
 		  <div class="card-body">
 		    <h5 class="card-title">Staking APR</h5>
-		    <p class="card-text">
+		    <div class="card-text">
+		    	<div class="text-center text-sm-end">
+			    	
+		<div class="btn-group border mb-1" role="group" data-chart="aprChart" aria-label="Change chart timeframe">
+			<input type="radio" class="btn-check" name="filter" id="aprChartfilter-7" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="aprChartfilter-7" onclick="updateData(this,7)">7d</label>
+
+			<input type="radio" class="btn-check" name="filter" id="aprChartfilter-30" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="aprChartfilter-30" onclick="updateData(this,30)">30d</label>
+
+			<input type="radio" class="btn-check" name="filter" id="aprChartfilter-90" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="aprChartfilter90" onclick="updateData(this,90)">90d</label>
+
+			<input type="radio" class="btn-check" name="filter" id="aprChartfilter-365" autocomplete="off">
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="aprChartfilter-365" onclick="updateData(this,365)">1y</label>
+
+			<input type="radio" class="btn-check" name="filter" id="aprChartfilter-0" autocomplete="off" checked>
+			<label class="btn btn-outline-black btn-sm border px-sm-3 active" for="aprChartfilter-0" onclick="updateData(this,0)">All</label>
+		</div>
+	
+				</div>
 		    	<div>
 					<canvas id="aprChart"></canvas>
 				</div>
-			</p>
+			</div>
 		  </div>
 		</div>
 
