@@ -24,3 +24,17 @@ body {
 	height: 1.5rem;
 	width: 1.5rem;
 }
+
+
+.btn-check:checked+.btn,
+.btn.active, .btn.show,
+.btn:first-child:active,
+:not(.btn-check)+.btn:active {
+	border-color: var(--bs-btn-active-border-color) !important;
+}
+.btn-group label {
+	padding-right: 0.75rem;
+	padding-left: 0.75rem;
+	padding-top: 0.15rem;
+	padding-bottom: 0.15rem;
+}
