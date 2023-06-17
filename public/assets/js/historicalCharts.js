@@ -42,7 +42,7 @@ function updateData(el, days) {
 	let chart = window[el.parentElement.getAttribute('data-chart')];
 	chart.data.labels = chart.data.labels_all.slice(-days);
 	chart.data.datasets.forEach((data, i) => {
-		data = chart.data.datasets[i].data_all.slice(-days);
+		chart.data.datasets[i].data = chart.data.datasets[i].data_all.slice(-days);
 	});
 	chart.update();
 }
@@ -133,7 +133,6 @@ var waitChart = new Chart(document.getElementById('waitChart'), {
 		}
 	}
 });
-
 
 var validatorChart = new Chart(document.getElementById('validatorChart'), {
 	type: 'line',  
