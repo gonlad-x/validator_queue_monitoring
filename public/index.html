@@ -48,9 +48,9 @@
 		<meta name="twitter:image:alt" content="Validator Queue">
 
 		<!-- Bootstrap 5 CSS -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 		<!-- Bootstrap 5 JS -->
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<!-- Custom CSS -->
 		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	</head>
@@ -70,6 +70,77 @@
 		</span>
 	</div>
 
+			
+	
+	<style type="text/css">
+		.toast-container {
+			z-index: 1090;
+		}
+		.toast {
+			border-radius: 0.5rem !important;
+			background-color: var(--bs-body-bg);
+		}
+		.toast-header {
+
+		}
+		.toast-badge {
+			height: 17px;
+			width: 17px;
+		}
+	</style>
+	
+	<!-- Toast -->
+	<div class="toast-container position-fixed bottom-0 end-0 p-3">
+		<div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+		    <div class="toast-header">
+				<span class="toast-badge bg-info rounded-1"></span>
+				<strong class="toast-title me-auto ms-2">Ether Alpha's Gitcoin grant is live!</strong>
+				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" onclick="hidetoast()"></button>
+		    </div>
+		    <div class="toast-body">
+				<div class="toast-text">
+					This round runs through August 29th. If you enjoy this or <a href='https://etheralpha.org/' target='_blank'>other tools</a> created, please support to help maintain existing projects and fund new ones.
+				</div>
+				
+		<div class="toast-buttons d-flex gap-2 mt-2 pt-2">
+			<a href="https://explorer.gitcoin.co/#/round/10/0x8de918f0163b2021839a8d84954dd7e8e151326d/0x8de918f0163b2021839a8d84954dd7e8e151326d-158" target="_blank" class="btn btn-dark btn-sm">Donate</a>
+			<button type="button" class="btn btn-outline-dark btn-sm" data-bs-dismiss="toast" onclick="hidetoast()">Close</button>
+		</div>
+		
+		    </div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		const toastEl = document.getElementById('toast');
+		const toast = new bootstrap.Toast(toastEl);
+		showtoast();
+
+		// Loads/shows notification bar if users hasn't closed it yet
+		function showtoast() {
+		    if (true == true) {
+		        const toastName = "toast-1";
+		        const hideToast = localStorage.getItem(toastName);
+		        const timestamp = Math.round(Date.now()/10000)*10;
+		        if (hideToast != "true" && timestamp < 1693310400) {
+		            toast.show();
+		        }
+		    }
+		}
+		// Hides toast bar when user closes it
+		function hidetoast(id=null) {
+		    if (id) {
+		        const toastName = `toast-${id}`;
+		        const timestamp = Math.round(Date.now()/10000)*10;
+		        localStorage.setItem(toastName, timestamp);
+		    } else {
+		        const toastName = "toast-1";
+		        localStorage.setItem(toastName, "true");
+		    }
+		}
+	</script>
+	
+	
 			<div class="container">
 				
     <div class="py-3 my-2 text-center">
@@ -79,7 +150,7 @@
     			Data provided by 
     			<a href="https://beaconcha.in/" target="_blank">beaconcha.in</a>
     		</small>
-    		<small id="lastUpdated" class="d-block fst-italic fs-6" data-last-updated="1692759591.5951893"></small>
+    		<small id="lastUpdated" class="d-block fst-italic fs-6" data-last-updated="1692760699.5466344"></small>
     	</div>
     </div>
   
@@ -92,11 +163,11 @@
 			    <div class="card-text">
 			    	<div class="d-flex justify-content-between">
 				    	<span>Validators: </span>
-				    	<span>59,942</span>
+				    	<span>59,909</span>
 			    	</div>
 				    <div class="d-flex justify-content-between">
 				    	<span>Wait: </span>
-				    	<span>23 days, 14 hours</span>
+				    	<span>23 days, 13 hours</span>
 			    	</div>
 			    	<div class="d-flex justify-content-between">
 				    	<span>Churn: </span>
@@ -132,11 +203,11 @@
 			    <div class="card-text">
 			    	<div class="d-flex justify-content-between">
 			    		<span>Active Validators: </span>
-			    		<span>745,905</span>
+			    		<span>745,938</span>
 		    		</div>
 				    <div class="d-flex justify-content-between">
 				    	<span>Staked ETH: </span>
-				    	<span>23.7M (19.75%)</span>
+				    	<span>23.8M (19.76%)</span>
 			    	</div>
 			    	<div class="d-flex justify-content-between">
 				    	<span>APR: </span>
