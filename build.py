@@ -6,6 +6,7 @@ import json
 from datetime import datetime, timezone
 from partials.head import head
 from partials.dark_mode_toggle import dark_mode_toggle
+from partials.toast import toast
 from partials.header import header
 from partials.overview import overview
 from partials.faq import faq
@@ -175,7 +176,7 @@ def update_historical_data():
 			"staked_percent":percent_eth_staked,
 			"apr":staking_apr
 		}
-		print("\nhistorical_data: \n\t" + str(all_data))
+		# print("\nhistorical_data: \n\t" + str(all_data))
 		print("\ntodays_data: \n\t" + str(todays_data))
 		if len(all_data) > 0 and all_data[-1].get('date') is not None:
 			if date != all_data[-1]['date']:
@@ -195,6 +196,7 @@ def generate_html(entry_waiting_time, beacon_entering, exit_waiting_time, beacon
 		{head}
 		<body>
 			{dark_mode_toggle}
+			{toast()}
 			<div class="container">
 				{header(last_updated)}
 				{overview(entry_waiting_time, beacon_entering, exit_waiting_time, beacon_exiting, current_churn, active_validators, amount_eth_staked, percent_eth_staked, staking_apr)}

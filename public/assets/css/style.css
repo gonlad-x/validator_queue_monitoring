@@ -38,3 +38,31 @@ body {
 	padding-top: 0.15rem;
 	padding-bottom: 0.15rem;
 }
+
+
+.dark-mode .btn-dark:not(.ignore) {
+    --bs-btn-color: var(--bs-body-bg);
+    --bs-btn-bg: var(--bs-gray-100);
+    --bs-btn-border-color: var(--bs-gray-100);
+    --bs-btn-hover-color: var(--bs-body-bg);
+    --bs-btn-hover-bg: var(--bs-gray-300);
+    --bs-btn-hover-border-color: var(--bs-gray-300);
+    --bs-btn-active-color: var(--bs-body-bg);
+    --bs-btn-active-bg: var(--bs-gray-300);
+    --bs-btn-active-border-color: var(--bs-gray-300);
+    --bs-btn-disabled-color: var(--bs-body-bg);
+    --bs-btn-disabled-bg: var(--bs-gray-300);
+    --bs-btn-disabled-border-color: var(--bs-gray-300);
+}
+.dark-mode .btn-outline-dark:not(.ignore) {
+    --bs-btn-color: var(--bs-gray-100);
+    --bs-btn-border-color: var(--bs-gray-100);
+    --bs-btn-hover-color: var(--bs-body-bg);
+    --bs-btn-hover-bg: var(--bs-gray-100);
+    --bs-btn-hover-border-color: var(--bs-gray-100);
+    --bs-btn-active-color: var(--bs-body-bg);
+    --bs-btn-active-bg: var(--bs-gray-100);
+    --bs-btn-active-border-color: var(--bs-gray-100);
+    --bs-btn-disabled-color: var(--bs-gray-100);
+    --bs-btn-disabled-border-color: var(--bs-gray-100);
+}
