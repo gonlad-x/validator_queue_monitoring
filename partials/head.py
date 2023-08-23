@@ -46,9 +46,9 @@ head = r"""
 		<meta name="twitter:image:alt" content="Validator Queue">
 
 		<!-- Bootstrap 5 CSS -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 		<!-- Bootstrap 5 JS -->
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<!-- Custom CSS -->
 		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	</head>
