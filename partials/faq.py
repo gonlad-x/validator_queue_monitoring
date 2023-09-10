@@ -17,6 +17,9 @@ faq = r"""
 
 					<p class="fw-bold text-decoration-underline mb-2">What is churn?</p>
 					<p>The churn is a rate limit on the amount of validators that can enter or exit per epoch and <a href="https://docs.ethstaker.cc/ethstaker-knowledge-base/staking-glossary#validator-queue" target="_blank">changes based on the amount of active validators</a>. This throttling mechanism help prevent instability in consensus.</p>
+
+					<p class="fw-bold text-decoration-underline mb-2">What is an epoch?</p>
+					<p>An epoch is a period of 32 slots where the validators propose and attest for blocks. With each slot being 12 seconds, an epoch is 6.4 minutes (6 minutes and 24 seconds).</p>
 				</div>
 			</div>
 		</div>
