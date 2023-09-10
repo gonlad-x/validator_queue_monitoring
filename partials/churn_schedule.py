@@ -13,22 +13,7 @@ churn_schedule = r"""
 							<td>Churn Per Day</td>
 						</tr>
 						<tr>
-							<td>65,536</td>
-							<td>1</td>
-							<td>225</td>
-						</tr>
-						<tr>
-							<td>131,072</td>
-							<td>2</td>
-							<td>450</td>
-						</tr>
-						<tr>
-							<td>196,608</td>
-							<td>3</td>
-							<td>675</td>
-						</tr>
-						<tr>
-							<td>262,144</td>
+							<td>0</td>
 							<td>4</td>
 							<td>900</td>
 						</tr>
