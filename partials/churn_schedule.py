@@ -6,7 +6,7 @@ churn_schedule = r"""
 			</h2>
 			<div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionChurnSchedule">
 				<div class="accordion-body">
-					<table>
+					<table class="table">
 						<tr>
 							<td>Active Validators</td>
 							<td>Churn Per Epoch</td>
