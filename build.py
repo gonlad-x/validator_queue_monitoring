@@ -202,7 +202,7 @@ def generate_html(entry_waiting_time, beacon_entering, exit_waiting_time, beacon
 				{header(last_updated)}
 				{overview(entry_waiting_time, beacon_entering, exit_waiting_time, beacon_exiting, current_churn, active_validators, amount_eth_staked, percent_eth_staked, staking_apr)}
 				{faq}
-				{churn_schedule}
+				{churn_schedule(queue_data["validatorscount"])}
 				{historical_charts}
 				{footer(historical_data)}
 			</div>
