@@ -66,3 +66,11 @@ body {
     --bs-btn-disabled-color: var(--bs-gray-100);
     --bs-btn-disabled-border-color: var(--bs-gray-100);
 }
+
+.table tbody tr.active td {
+    background-color: var(--bs-gray-200);
+}
+
+.dark-mode .table tbody tr.active td {
+    background-color: var(--bs-gray-800);
+}
