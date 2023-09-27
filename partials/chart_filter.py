@@ -8,7 +8,7 @@ def chart_filter(chart):
 			<label class="btn btn-outline-black btn-sm border px-sm-3" for="{chart}filter-30" onclick="updateData(this,30)">30d</label>
 
 			<input type="radio" class="btn-check" name="filter" id="{chart}filter-90" autocomplete="off">
-			<label class="btn btn-outline-black btn-sm border px-sm-3" for="{chart}filter90" onclick="updateData(this,90)">90d</label>
+			<label class="btn btn-outline-black btn-sm border px-sm-3" for="{chart}filter-90" onclick="updateData(this,90)">90d</label>
 
 			<input type="radio" class="btn-check" name="filter" id="{chart}filter-365" autocomplete="off">
 			<label class="btn btn-outline-black btn-sm border px-sm-3" for="{chart}filter-365" onclick="updateData(this,365)">1y</label>
