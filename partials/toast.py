@@ -1,10 +1,10 @@
 enable_toast = "true" # "true" or "false"
 toast_msg_id = 1 # must increment when creating a new message
 toast_title = "Ether Alpha's Gitcoin grant is live!"
-toast_msg = "This round runs through August 29th. If you enjoy this or <a href='https://etheralpha.org/' target='_blank'>other tools</a> created, please support to help maintain existing projects and fund new ones." # Best when under 100 characters
-toast_link = "https://explorer.gitcoin.co/#/round/10/0x8de918f0163b2021839a8d84954dd7e8e151326d/0x8de918f0163b2021839a8d84954dd7e8e151326d-158" # Optional, leave blank to omit
+toast_msg = "This round runs until November 30th. If you enjoy this or <a href='https://etheralpha.org/' target='_blank'>other tools</a> created, please support to help maintain existing projects and fund new ones." # Best when under 100 characters
+toast_link = "https://explorer.gitcoin.co/#/round/424/0xd4cc0dd193c7dc1d665ae244ce12d7fab337a008/0xd4cc0dd193c7dc1d665ae244ce12d7fab337a008-20" # Optional, leave blank to omit
 toast_link_text = "Donate"
-toast_expiration = 1693310400 # epoch time in seconds
+toast_expiration = 1701302399 # epoch time in seconds
 
 
 toast_css = r"""
