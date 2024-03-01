@@ -150,7 +150,7 @@
     			Data provided by 
     			<a href="https://beaconcha.in/" target="_blank">beaconcha.in</a>
     		</small>
-    		<small id="lastUpdated" class="d-block fst-italic fs-6" data-last-updated="1709264447.9492207"></small>
+    		<small id="lastUpdated" class="d-block fst-italic fs-6" data-last-updated="1709265124.5050323"></small>
     	</div>
     </div>
   
@@ -163,11 +163,11 @@
 			    <div class="card-text">
 			    	<div class="d-flex justify-content-between">
 				    	<span>Validators: </span>
-				    	<span>2,764</span>
+				    	<span>2,736</span>
 			    	</div>
 				    <div class="d-flex justify-content-between">
 				    	<span>Wait: </span>
-				    	<span>21 hours, 4 minutes</span>
+				    	<span>20 hours, 51 minutes</span>
 			    	</div>
 			    	<div class="d-flex justify-content-between">
 				    	<span>Churn: </span>
@@ -183,11 +183,24 @@
 			    <div class="card-text">
 			    	<div class="d-flex justify-content-between">
 			    		<span>Validators: </span>
-			    		<span>81</span>
+			    		<span>53</span>
 		    		</div>
 				    <div class="d-flex justify-content-between">
 				    	<span>Wait: </span>
-				    	<span>37 minutes</span>
+				    	<span>24 minutes</span>
+			    	</div>
+			    	<div class="d-flex justify-content-between">
+				    	<span>
+				    		Sweep Delay
+				    		<a href="https://ethereum.org/en/staking/withdrawals#validator-sweeping" target="_blank" style="
+							    text-decoration: none;
+							    font-size: 12px;
+							    position: relative;
+							    top: -5px;">
+							    ⓘ
+						    </a>:
+						</span>
+				    	<span>8.4 days</span>
 			    	</div>
 			    	<div class="d-flex justify-content-between">
 				    	<span>Churn: </span>
@@ -241,6 +254,9 @@
 
 					<p class="fw-bold text-decoration-underline mb-2">What is an epoch?</p>
 					<p>An epoch is a period of 32 slots where the validators propose and attest for blocks. With each slot being 12 seconds, an epoch is 6.4 minutes (6 minutes and 24 seconds).</p>
+
+					<p class="fw-bold text-decoration-underline mb-2">What is sweep?</p>
+					<p>The "sweep delay" is how long it will take (after getting through the exit queue) for your funds to be withdrawn to your withdrawal address. When you exit your validator and it make it through the exit queue (if any), it becomes withdrawable. From there, the network cycles through withdrawable validators to "sweep" the balance to the specified withdrawal addresses. The more validators there are, the longer it will take to cycle through the entire set.</p>
 				</div>
 			</div>
 		</div>
