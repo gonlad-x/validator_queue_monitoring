@@ -20,6 +20,9 @@ faq = r"""
 
 					<p class="fw-bold text-decoration-underline mb-2">What is an epoch?</p>
 					<p>An epoch is a period of 32 slots where the validators propose and attest for blocks. With each slot being 12 seconds, an epoch is 6.4 minutes (6 minutes and 24 seconds).</p>
+
+					<p class="fw-bold text-decoration-underline mb-2">What is sweep?</p>
+					<p>The "sweep delay" is how long it will take (after getting through the exit queue) for your funds to be withdrawn to your withdrawal address. When you exit your validator and it make it through the exit queue (if any), it becomes withdrawable. From there, the network cycles through withdrawable validators to "sweep" the balance to the specified withdrawal addresses. The more validators there are, the longer it will take to cycle through the entire set.</p>
 				</div>
 			</div>
 		</div>
