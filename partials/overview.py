@@ -35,6 +35,19 @@ def overview(entry_waiting_time, beacon_entering, exit_waiting_time, beacon_exit
 				    	<span>{exit_waiting_time}</span>
 			    	</div>
 			    	<div class="d-flex justify-content-between">
+				    	<span>
+				    		Sweep Delay
+				    		<a href="https://ethereum.org/en/staking/withdrawals#validator-sweeping" target="_blank" style="
+							    text-decoration: none;
+							    font-size: 12px;
+							    position: relative;
+							    top: -5px;">
+							    ⓘ
+						    </a>:
+						</span>
+				    	<span>{round(active_validators/115200, 1)} days</span>
+			    	</div>
+			    	<div class="d-flex justify-content-between">
 				    	<span>Churn: </span>
 				    	<span>{current_churn}/epoch</span>
 			    	</div>
