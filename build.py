@@ -24,8 +24,10 @@ apr_data = requests.get(apr_endpoint).json()["data"]
 supply_endpoint = "https://ultrasound.money/api/v2/fees/supply-over-time"
 supply_data = requests.get(supply_endpoint).json()
 
-last_updated = time.time()
-
+current_time = time.time()
+dencun_activation_time = 1606824023 + 103514112 # seconds at epoch 0 + seconds to epoch 269568
+dencun_active = current_time > dencun_activation_time
+print("\ndencun_active: \n\t" + str(dencun_active))
 
 def estimate_entry_waiting_time():
 	beacon_entering = queue_data["beaconchain_entering"]
@@ -72,31 +74,38 @@ def calculate_wait_time(active_validators, queue):
 	for i, item in enumerate(scaling):
 		if active_validators > scaling[i]:
 			current_churn = epoch_churn[i]
+			if current_churn > 8 and dencun_active:
+				current_churn = 8
 		if (active_validators >= scaling[i]) and (active_validators < scaling[i+1]):
 			j = i
 			queue_remaining = queue
 			while queue_remaining > 0:
+				epoch_churn_j = epoch_churn[j]
+				day_churn_j = day_churn[j]
+				if epoch_churn_j > 8 and dencun_active:
+					epoch_churn_j = 8
+					day_churn_j = 1800
 				# different calcs for first run to account for starting in the middle of a level
 				if (i == j):
 					# if the entire queue empties in the current level
 					if (active_validators + queue_remaining) < scaling[j+1]:
-						churn_time_days += queue_remaining / day_churn[j]
-						churn_factor += queue_remaining * epoch_churn[j]
+						churn_time_days += queue_remaining / day_churn_j
+						churn_factor += queue_remaining * epoch_churn_j
 						queue_remaining = 0
 					# if the queue carries over into the next level
 					else:
-						churn_time_days += (scaling[j+1] - active_validators) / day_churn[j]
-						churn_factor += (scaling[j+1] - active_validators) * epoch_churn[j]
+						churn_time_days += (scaling[j+1] - active_validators) / day_churn_j
+						churn_factor += (scaling[j+1] - active_validators) * epoch_churn_j
 						queue_remaining -= (scaling[j+1] - active_validators)
 				# if the entire queue empties in the current level
 				elif (scaling[j] + queue_remaining) < scaling[j+1]:
-					churn_time_days += queue_remaining / day_churn[j]
-					churn_factor += queue_remaining * epoch_churn[j]
+					churn_time_days += queue_remaining / day_churn_j
+					churn_factor += queue_remaining * epoch_churn_j
 					queue_remaining = 0
 				# if the queue carries over into the next level
 				else:
-					churn_time_days += (scaling[j+1] - scaling[j]) / day_churn[j]
-					churn_factor += (scaling[j+1] - scaling[j]) * epoch_churn[j]
+					churn_time_days += (scaling[j+1] - scaling[j]) / day_churn_j
+					churn_factor += (scaling[j+1] - scaling[j]) * epoch_churn_j
 					queue_remaining -= (scaling[j+1] - scaling[j])
 
 				j += 1
@@ -199,7 +208,7 @@ def generate_html(entry_waiting_time, beacon_entering, exit_waiting_time, beacon
 			{dark_mode_toggle}
 			{toast()}
 			<div class="container">
-				{header(last_updated)}
+				{header(current_time)}
 				{overview(entry_waiting_time, beacon_entering, exit_waiting_time, beacon_exiting, current_churn, active_validators, amount_eth_staked, percent_eth_staked, staking_apr)}
 				{faq}
 				{churn_schedule}
