@@ -1,4 +1,4 @@
-def overview(entry_waiting_time, beacon_entering, exit_waiting_time, beacon_exiting, current_churn, active_validators, amount_eth_staked, percent_eth_staked, staking_apr):
+def overview(entry_waiting_time, beacon_entering, exit_waiting_time, beacon_exiting, current_entry_churn, current_exit_churn, active_validators, amount_eth_staked, percent_eth_staked, staking_apr):
 	return f"""
 		<div class="row row-cols-1 row-cols-md-2 gap-4 justify-content-center mx-1">
 
@@ -16,7 +16,7 @@ def overview(entry_waiting_time, beacon_entering, exit_waiting_time, beacon_exit
 			    	</div>
 			    	<div class="d-flex justify-content-between">
 				    	<span>Churn: </span>
-				    	<span>{current_churn}/epoch</span>
+				    	<span>{current_entry_churn}/epoch</span>
 			    	</div>
 				</div>
 			  </div>
@@ -49,7 +49,7 @@ def overview(entry_waiting_time, beacon_entering, exit_waiting_time, beacon_exit
 			    	</div>
 			    	<div class="d-flex justify-content-between">
 				    	<span>Churn: </span>
-				    	<span>{current_churn}/epoch</span>
+				    	<span>{current_exit_churn}/epoch</span>
 			    	</div>
 				</div>
 			  </div>
